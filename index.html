@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Google Sheets Formula Reference</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+    h1, h2, h3 {
+      margin-top: 40px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+    input[type="text"] {
+      width: 300px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    .search-section {
+      margin-bottom: 40px;
+    }
+    .highlight {
+      background-color: #ffffcc;
+    }
+  </style>
+  <script>
+    function searchFormula() {
+      const input = document.getElementById("searchInput").value.toLowerCase();
+      const headers = document.querySelectorAll("h3, h2");
+
+      let found = false;
+      headers.forEach(header => {
+        if (header.textContent.toLowerCase().includes(input)) {
+          header.scrollIntoView({ behavior: "smooth", block: "start" });
+          header.classList.add("highlight");
+          setTimeout(() => header.classList.remove("highlight"), 2000);
+          found = true;
+        }
+      });
+
+      if (!found) {
+        alert("No match found.");
+      }
+    }
+  </script>
+</head>
+<body>
+
+  <h1>Google Sheets Formula Reference</h1>
+
+  <div class="search-section">
+    <label for="searchInput">Search a formula or section:</label>
+    <input type="text" id="searchInput" placeholder="e.g. IF, Math, MOD" />
+    <button onclick="searchFormula()">Search</button>
+  </div>
+
+  <!-- Section 1 -->
+  <h2>Formulas Usable in Both Cells and Conditional Formatting</h2>
+
+  <h3>Math</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>MOD</td><td>Returns the remainder after division</td><td>=MOD(ROW(), 2)=0</td></tr>
+  </table>
+
+  <h3>Logic</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>IF</td><td>Returns one value if a condition is true, another if false</td><td>=IF(A1>10, "Yes", "No")</td></tr>
+    <tr><td>AND</td><td>Returns TRUE if all conditions are true</td><td>=AND(A1>0, B1<10)</td></tr>
+    <tr><td>OR</td><td>Returns TRUE if any condition is true</td><td>=OR(A1=5, B1=10)</td></tr>
+    <tr><td>NOT</td><td>Returns the opposite of a logical value</td><td>=NOT(A1=5)</td></tr>
+  </table>
+
+  <!-- Section 2 -->
+  <h2>Formulas Usable Only in Cells</h2>
+
+  <h3>Lookup</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>VLOOKUP</td><td>Searches the first column for a key and returns a value in the same row</td><td>=VLOOKUP("Apple", A2:B10, 2, FALSE)</td></tr>
+    <tr><td>HLOOKUP</td><td>Searches the first row for a key and returns a value in the same column</td><td>=HLOOKUP("Q1", A1:D2, 2, FALSE)</td></tr>
+  </table>
+
+  <h3>Data Import</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>IMPORTRANGE</td><td>Imports data from another spreadsheet</td><td>=IMPORTRANGE("sheet_url", "Sheet1!A1:B10")</td></tr>
+  </table>
+
+  <h3>Array</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>ARRAYFORMULA</td><td>Performs a calculation over a range</td><td>=ARRAYFORMULA(A1:A10*2)</td></tr>
+    <tr><td>UNIQUE</td><td>Returns unique rows in the provided source range</td><td>=UNIQUE(A1:A10)</td></tr>
+  </table>
+
+  <!-- Section 3 -->
+  <h2>Formulas Usable Only in Conditional Formatting</h2>
+
+  <h3>Custom Rules</h3>
+  <table>
+    <tr><th>Formula Name</th><th>Description</th><th>Example</th></tr>
+    <tr><td>CUSTOM FORMULA</td><td>Use logic to apply formatting</td><td>=A1>100</td></tr>
+    <tr><td>MOD</td><td>Used to color alternating rows</td><td>=MOD(ROW(), 2)=0</td></tr>
+  </table>
+
+</body>
+</html>
